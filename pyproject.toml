@@ -10,6 +10,17 @@ authors = [{name = "Yaniv Golan", email = "yaniv@golan.name"}]
 readme = "README.md"
 requires-python = ">=3.11"
 license = {text = "MIT"}
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+    "Topic :: Multimedia :: Sound/Audio :: Speech",
+]
 dependencies = [
   "PyMuPDF>=1.26.6",
   "pdfminer.six>=20231228",
