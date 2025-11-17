@@ -2,7 +2,7 @@
 
 > Build ASR bias artifacts from presentation decks for Whisper and Google Speech-to-Text
 
-[![CI](https://github.com/your-org/asr-bias-builder/workflows/CI/badge.svg)](https://github.com/your-org/asr-bias-builder/actions)
+[![CI](https://github.com/yaniv-golan/asr-bias-builder/workflows/CI/badge.svg)](https://github.com/yaniv-golan/asr-bias-builder/actions)
 [![PyPI](https://img.shields.io/pypi/v/asr-bias-builder)](https://pypi.org/project/asr-bias-builder/)
 [![Python](https://img.shields.io/pypi/pyversions/asr-bias-builder)](https://pypi.org/project/asr-bias-builder/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
