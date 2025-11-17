@@ -1,0 +1,20 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+*.eggs/
+build/
+dist/
+.venv/
+.env/
+
+# IDE
+.vscode/
+.idea/
+
+# Outputs
+out/
+pipeline_results/
+asr-bias-output/
+asr-bias-summary.csv
+*.log

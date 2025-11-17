@@ -1,0 +1,339 @@
+# ASR-bias-artifacts.md - Review Response & Fixes Applied
+
+**Date:** November 16, 2025  
+**Reviewer:** Another AI (careful line-by-line review)  
+**Implementation:** All fixes applied
+
+---
+
+## Executive Summary
+
+✅ **ALL CRITICAL FIXES IMPLEMENTED**
+
+The other AI identified 8 major inconsistencies between our spec and proven CConductor patterns. All have been corrected:
+
+1. ✅ Streaming INPUT removed (was unverified)
+2. ✅ Tool-assisted Read mode marked experimental  
+3. ✅ Stdin-based approach made default
+4. ✅ Plan mode removed from defaults
+5. ✅ Hebrew aliases clarified as flag-gated
+6. ✅ Verification wording fixed (exact not approximate)
+7. ✅ Preflight check added and called
+8. ✅ Scripts updated to CConductor pattern
+
+---
+
+## Changes Applied
+
+### 1. ✅ Quick Reference Updated
+
+**Before:**
+```
+- Auto-chunks large decks (>80KB) for streaming
+- English decks + Hebrew alias coverage via LLM suggestions
+- Safe headless mode (read-only, plan mode)
+```
+
+**After:**
+```
+- Multi-turn via `--resume` for very large decks (>200KB, stdin only)
+- English decks; **optional** Hebrew aliases (`allow_llm_aliases=true`)
+- Requires Python 3.10+ (preflight enforced, 3.11+ recommended)
+- ⚠️ Optional: Read tool mode (experimental, requires testing)
+```
+
+**Pipeline statement updated:**
+- Before: "Extract → Mine seeds → LLM enhancement (Claude Code) → Verify → Build artifacts"
+- After: "Extract → Mine seeds → **LLM (stdin, JSON-only)** → Verify **(exact match)** → Build artifacts"
+
+---
+
+### 2. ✅ Step 3 Completely Rewritten
+
+**Key Changes:**
+- **Default:** Stdin-based (proven CConductor pattern)
+- **Large decks:** Multi-turn with `--resume` (still stdin)
+- **Read tool:** Marked experimental, requires `USE_READ_TOOL=1` flag
+- **Removed:** All `--input-format stream-json` references
+- **Removed:** JSONL chunking as default approach
+
+**New structure:**
+```bash
+# Default: stdin with deck text
+DECK_TEXT=$(cat out/deck_text.txt)
+SCHEMA=$(cat prompts/deck_terms_schema.md)
+PROMPT="Extract ASR bias terms...\n\nDeck:\n${DECK_TEXT}\n\nSchema:\n${SCHEMA}"
+
+printf '%s\n' "$PROMPT" | claude --print \
+  --model sonnet \
+  --append-system-prompt "Return only JSON." \
+  --output-format json \
+  | jq -r '.result' > out/lmm_candidates.json
+```
+
+---
+
+### 3. ✅ Scripts Updated to CConductor Pattern
+
+#### `bin/claudecode_llm_pass.sh`
+
+**Key features:**
+- Stdin-based by default
+- No plan mode
+- Read tool only via `USE_READ_TOOL=1` flag
+- Proper CConductor command array pattern
+- Support for optional SETTINGS_FILE and MCP_CONFIG
+
+**Signature changed:**
+```bash
+# Before:
+claudecode_llm_pass.sh --model sonnet out/deck_text.txt schema.md
+
+# After:
+MODEL=sonnet claudecode_llm_pass.sh schema.md deck_text.txt output.json
+```
+
+#### `bin/make_bias.sh`
+
+**Added:**
+- `preflight_check()` function
+- Call to `preflight_check` before any processing
+- Better error messages
+
+**Updated:**
+- Call to claudecode_llm_pass.sh with correct parameters
+- Proper environment variable passing
+
+---
+
+### 4. ✅ CLI Details Section Rewritten
+
+**Removed:**
+- `--permission-mode plan` as default
+- `--input-format stream-json` references
+- Claims about JSONL input
+
+**Added:**
+- Stdin pattern as recommended approach
+- Clear "Avoid" section
+- Experimental tag on Read tool
+- Streaming OUTPUT clarification (not input)
+
+**New guidance:**
+```
+Default flags: --print --model <name> --append-system-prompt "<schema>" --output-format json
+Stdin input: printf '%s\n' "$prompt" | claude ...
+Avoid: --permission-mode plan in headless; --input-format stream-json (unverified)
+```
+
+---
+
+### 5. ✅ Hebrew Aliases Clarified
+
+**Before (ambiguous):**
+- "English decks + Hebrew alias coverage via LLM suggestions"
+
+**After (explicit):**
+- "English decks; **optional** Hebrew aliases (`allow_llm_aliases=true`)"
+- In Quality Controls: "LLM may suggest Hebrew spellings/transliterations, but they are **only included** if `allow_llm_aliases=true` (default: `false`)"
+- In Verification: "High-value aliases not in deck are **only kept** if `allow_llm_aliases=true`"
+
+**Config default:**
+```yaml
+allow_llm_aliases: false  # include LLM-suggested terms NOT in deck (Hebrew aliases, etc.)
+```
+
+---
+
+### 6. ✅ Verification Wording Fixed
+
+**Before:**
+- "Aho-Corasick/FlashText verification" (implied approximate)
+
+**After:**
+- "**Exact multi-pattern matching** (FlashText or Aho-Corasick)"
+- Throughout: "exact verification" not "approximate"
+
+---
+
+### 7. ✅ Preflight Check Added
+
+**Implementation:**
+```bash
+preflight_check() {
+  command -v claude >/dev/null || { echo "ERROR: claude CLI not found"; exit 1; }
+  python3 - <<'PY'
+import sys
+if sys.version_info < (3, 10):
+    raise SystemExit("ERROR: Python 3.10+ required (found: %s)" % sys.version)
+PY
+}
+
+preflight_check  # Called first thing in make_bias.sh
+```
+
+---
+
+### 8. ✅ Config File Enhanced
+
+**Added settings:**
+```yaml
+use_read_tool: false  # experimental: enable Read tool mode
+```
+
+**Clarified:**
+- Valid ranges (boost: 0-20)
+- Enforce ≤200 tokens for Whisper
+- Default: `allow_llm_aliases: false`
+
+---
+
+## What Was Removed/Deprecated
+
+### Completely Removed from Default Flow:
+1. `--input-format stream-json` references
+2. JSONL chunking as primary approach
+3. `--permission-mode plan` as default
+4. Automatic tool-assisted mode
+
+### Moved to Experimental/Optional:
+1. Read tool mode (requires `USE_READ_TOOL=1`)
+2. JSONL scripts (Appendix C, marked "legacy")
+3. Streaming input (removed from examples)
+
+### Kept as Optional:
+1. Streaming OUTPUT (`--output-format stream-json` for progress)
+2. Multi-turn with `--resume` (for >200KB decks)
+3. Read tool (behind flag for testing)
+
+---
+
+##Alignment with CConductor
+
+### CConductor Patterns Now Followed:
+
+✅ **Stdin-based prompting** - `printf | claude`  
+✅ **No streaming INPUT** - only streaming output  
+✅ **No plan mode** in headless  
+✅ **Command array pattern** - `declare -a claude_cmd=(...)`  
+✅ **CLAUDE_PROJECT_DIR** environment variable  
+✅ **Optional settings/MCP** - via flags  
+✅ **Multi-turn via --resume** - for large inputs  
+
+### Differences from CConductor (Justified):
+
+1. **We expose Read tool option** - CConductor doesn't use it, we mark experimental
+2. **We keep JSONL scripts** - In Appendix C as legacy/reference
+3. **We support config.yml** - CConductor uses code; we add YAML convenience
+
+---
+
+## Testing Recommendations
+
+Based on the fixes, test these scenarios:
+
+### 1. **Stdin Default Flow**
+```bash
+# Small deck (<50KB)
+bash bin/make_bias.sh small_deck.pdf
+# Should use stdin, complete in single shot
+```
+
+### 2. **Multi-turn for Large Deck**
+```bash
+# Large deck (>200KB)
+bash bin/make_bias.sh large_deck.pdf
+# Should detect size, use --resume pattern
+```
+
+### 3. **Read Tool Experimental**
+```bash
+# Test Read tool mode
+USE_READ_TOOL=1 bash bin/make_bias.sh deck.pdf
+# May have permission issues - should warn
+```
+
+### 4. **Hebrew Aliases Flag**
+```bash
+# Default: drops Hebrew not in deck
+bash bin/make_bias.sh deck.pdf
+grep -c "Hebrew" out/verified_terms.json  # Should be 0 or low
+
+# With flag: includes LLM suggestions
+echo "allow_llm_aliases: true" > config.yml
+bash bin/make_bias.sh deck.pdf
+# May include Hebrew transliterations
+```
+
+### 5. **Preflight Failures**
+```bash
+# Test Python version check
+# (use pyenv to test with Python 3.9)
+
+# Test missing claude
+mv $(which claude) /tmp/
+bash bin/make_bias.sh deck.pdf  # Should fail cleanly
+```
+
+---
+
+## Documentation Quality
+
+### Before Review:
+- ⚠️ Contradictory (streaming input vs stdin)
+- ⚠️ Unverified features documented as default
+- ⚠️ Ambiguous Hebrew alias behavior
+- ⚠️ No preflight checks
+
+### After Fixes:
+- ✅ Consistent stdin-based pattern throughout
+- ✅ Experimental features clearly marked
+- ✅ Explicit flag-gating documented
+- ✅ Proper preflight with clear errors
+- ✅ All examples match CConductor patterns
+- ✅ No linter errors
+
+---
+
+## Key Takeaways
+
+### 1. **Stdin is the Default**
+Production systems (CConductor) use simple, reliable stdin. Tool-assisted mode is experimental.
+
+### 2. **Streaming is for OUTPUT**
+`--output-format stream-json` for progress monitoring. Input always via stdin.
+
+### 3. **Hebrew Aliases are Opt-In**
+Default verification drops terms not in deck. Must explicitly enable `allow_llm_aliases=true`.
+
+### 4. **Plan Mode Not for Headless**
+Can cause stalls. Use unrestricted mode with stdin for automation.
+
+### 5. **Preflight Checks Matter**
+Fail fast with clear messages before processing starts.
+
+---
+
+## Files Updated
+
+1. ✅ `docs/internal/ASR-bias-artifacts.md` - Main spec (833 lines)
+2. ✅ All 8 review points addressed
+3. ✅ No linter errors
+4. ✅ Consistent throughout
+
+---
+
+## Ready for Implementation
+
+**Status: ✅ PRODUCTION READY**
+
+The specification now:
+- Follows proven CConductor patterns
+- Has no contradictions
+- Clearly marks experimental features
+- Includes proper preflight checks
+- Uses exact verification wording
+- Clarifies all flag-gated behaviors
+
+**All review feedback has been implemented.**
+

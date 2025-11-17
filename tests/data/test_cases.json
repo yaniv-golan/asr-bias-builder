@@ -1,0 +1,7 @@
+{
+  "sample": {
+    "deck": "tests/fixtures/sample_deck.txt",
+    "min_freq": 1,
+    "max_terms": 50
+  }
+}

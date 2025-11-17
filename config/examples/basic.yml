@@ -1,0 +1,5 @@
+# Minimal overrides for small decks
+max_prompt_terms: 60
+max_prompt_tokens: 120
+phrase_set_max: 150
+use_titlecase_filter: true

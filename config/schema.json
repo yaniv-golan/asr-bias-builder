@@ -1,0 +1,15 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "ASR Bias Builder Config",
+  "type": "object",
+  "properties": {
+    "max_prompt_terms": {"type": "integer", "minimum": 1},
+    "max_prompt_tokens": {"type": "integer", "minimum": 1},
+    "phrase_set_max": {"type": "integer", "minimum": 1},
+    "stop_words": {"type": "array", "items": {"type": "string"}},
+    "deny_patterns": {"type": "array", "items": {"type": "string"}},
+    "ocr_aliases": {"type": "object"},
+    "deck_overrides": {"type": "object"}
+  },
+  "additionalProperties": true
+}

@@ -1,0 +1,11 @@
+# Advanced config toggles demonstrating optional features
+pos_filter: true
+pos_model: en_core_web_trf
+pos_valid_tags: ["PROPN", "NOUN", "X"]
+max_prompt_terms: 150
+max_prompt_tokens: 240
+include_aliases_in_prompt: true
+include_aliases_in_phrase_set: true
+class_boost_floors:
+  PERSON: 12.0
+  ORG: 10.0

@@ -1,0 +1,16 @@
+cffi==2.0.0
+charset-normalizer==3.4.4
+cryptography==46.0.3
+flashtext==2.7
+lxml==6.0.2
+packaging==25.0
+pdfminer.six==20251107
+pillow==12.0.0
+pycparser==2.23
+PyMuPDF==1.26.6
+pytesseract==0.3.13
+python-pptx==1.0.2
+PyYAML==6.0.3
+regex==2025.11.3
+typing_extensions==4.15.0
+xlsxwriter==3.2.9

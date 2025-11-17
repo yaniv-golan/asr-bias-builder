@@ -1,0 +1,13 @@
+# Example deck-specific overrides keyed by deck ID
+deck_overrides:
+  sample_deck_pdf:
+    deny_exact:
+      - confidential
+      - proprietary
+      - roadmap
+  demo_pitch_beta_pdf:
+    deny_exact:
+      - nda
+      - placeholder
+      - webinar
+    use_titlecase_filter: true

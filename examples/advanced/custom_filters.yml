@@ -1,0 +1,14 @@
+stop_words:
+  - runway
+  - pipeline
+  - mrr
+
+deny_patterns:
+  - "^series [abc]$"
+  - "(?i)seed stage"
+
+deck_overrides:
+  sample_deck_pdf:
+    deny_exact:
+      - slack
+      - globals

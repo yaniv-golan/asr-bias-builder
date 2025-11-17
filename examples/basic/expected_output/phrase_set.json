@@ -1,0 +1,28 @@
+{
+  "phraseSets": [
+    {
+      "phrases": [
+        {"value": "Dyson Sphere AI", "boost": 10.0},
+        {"value": "Dyson Sphere", "boost": 9.5},
+        {"value": "AI Compute", "boost": 8.5},
+        {"value": "Solar Collectors", "boost": 8.0},
+        {"value": "Integrated Energy Storage", "boost": 8.0},
+        {"value": "Autonomous Maintenance", "boost": 8.0},
+        {"value": "Advanced Thermal Management", "boost": 8.0},
+        {"value": "Modular Design", "boost": 7.5},
+        {"value": "Dyson Sphere Prototype", "boost": 8.5},
+        {"value": "AI Energy Infrastructure", "boost": 8.0},
+        {"value": "Dr. Liam Nguyen", "boost": 10.0},
+        {"value": "Sakshi Gupta", "boost": 10.0},
+        {"value": "Dr. Amelia Hawking", "boost": 10.0},
+        {"value": "Samantha Zhao", "boost": 10.0},
+        {"value": "Elon Jatinder", "boost": 10.0},
+        {"value": "Dyson Sphere Roadmap", "boost": 7.5},
+        {"value": "Pre-seed Funding", "boost": 7.0},
+        {"value": "99.99% Uptime", "boost": 7.0},
+        {"value": "Clean Energy Revolution", "boost": 8.0},
+        {"value": "AI Innovation Pipeline", "boost": 7.5}
+      ]
+    }
+  ]
+}

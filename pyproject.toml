@@ -1,0 +1,39 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "asr-bias-builder"
+version = "0.1.0"
+description = "Build ASR bias artifacts from presentation decks"
+authors = [{name = "ASR Bias Builder Team"}]
+readme = "README.md"
+requires-python = ">=3.11"
+license = {text = "MIT"}
+dependencies = [
+  "PyMuPDF>=1.26.6",
+  "pdfminer.six>=20231228",
+  "python-pptx>=0.6.23",
+  "pytesseract>=0.3.10",
+  "Pillow>=10.2.0",
+  "PyYAML>=6.0",
+  "regex>=2023.12",
+  "flashtext>=2.7",
+]
+
+[project.optional-dependencies]
+google = ["google-cloud-speech>=2.20.0"]
+all = ["spacy>=3.7", "google-cloud-speech>=2.20.0", "pytesseract>=0.3.10"]
+
+[project.urls]
+Homepage = "https://github.com/your-org/asr-bias-builder"
+Documentation = "https://github.com/your-org/asr-bias-builder/tree/main/docs"
+
+[project.scripts]
+asr-bias-builder = "asr_bias_builder.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["."]
+
+[tool.setuptools.package-data]
+"asr_bias_builder" = ["llm/prompts/*.md"]

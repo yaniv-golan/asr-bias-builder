@@ -1,0 +1,11 @@
+version: '3.9'
+services:
+  asr-bias-builder:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile.dev
+    volumes:
+      - ..:/workspace
+    working_dir: /workspace
+    environment:
+      - PYTHONUNBUFFERED=1

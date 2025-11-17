@@ -1,0 +1,22 @@
+[
+  {"canonical": "Dyson Sphere AI", "classes": ["ORG"], "present_in_deck": true, "frequency": 18, "priority": 0.95, "score": 0.98},
+  {"canonical": "Dyson Sphere", "classes": ["PRODUCT"], "present_in_deck": true, "frequency": 36, "priority": 0.9, "score": 0.95},
+  {"canonical": "AI Compute", "classes": ["TECH"], "present_in_deck": true, "frequency": 14, "priority": 0.85, "score": 0.9},
+  {"canonical": "Solar Collectors", "classes": ["TECH"], "present_in_deck": true, "frequency": 8, "priority": 0.8, "score": 0.85},
+  {"canonical": "Integrated Energy Storage", "classes": ["TECH"], "present_in_deck": true, "frequency": 7, "priority": 0.82, "score": 0.86},
+  {"canonical": "Autonomous Maintenance", "classes": ["TECH"], "present_in_deck": true, "frequency": 6, "priority": 0.8, "score": 0.84},
+  {"canonical": "Advanced Thermal Management", "classes": ["TECH"], "present_in_deck": true, "frequency": 6, "priority": 0.8, "score": 0.84},
+  {"canonical": "Modular Design", "classes": ["TECH"], "present_in_deck": true, "frequency": 5, "priority": 0.78, "score": 0.82},
+  {"canonical": "Dyson Sphere Prototype", "classes": ["PRODUCT"], "present_in_deck": true, "frequency": 5, "priority": 0.82, "score": 0.85},
+  {"canonical": "AI Energy Infrastructure", "classes": ["PRODUCT"], "present_in_deck": true, "frequency": 4, "priority": 0.78, "score": 0.82},
+  {"canonical": "Dr. Liam Nguyen", "classes": ["PERSON"], "present_in_deck": true, "frequency": 3, "priority": 0.95, "score": 0.97},
+  {"canonical": "Sakshi Gupta", "classes": ["PERSON"], "present_in_deck": true, "frequency": 3, "priority": 0.95, "score": 0.97},
+  {"canonical": "Dr. Amelia Hawking", "classes": ["PERSON"], "present_in_deck": true, "frequency": 3, "priority": 0.95, "score": 0.97},
+  {"canonical": "Samantha Zhao", "classes": ["PERSON"], "present_in_deck": true, "frequency": 3, "priority": 0.93, "score": 0.96},
+  {"canonical": "Elon Jatinder", "classes": ["PERSON"], "present_in_deck": true, "frequency": 3, "priority": 0.93, "score": 0.96},
+  {"canonical": "Dyson Sphere Roadmap", "classes": ["PRODUCT"], "present_in_deck": true, "frequency": 4, "priority": 0.76, "score": 0.81},
+  {"canonical": "Pre-seed Funding", "classes": ["TECH"], "present_in_deck": true, "frequency": 2, "priority": 0.74, "score": 0.78},
+  {"canonical": "99.99% Uptime", "classes": ["TECH"], "present_in_deck": true, "frequency": 2, "priority": 0.74, "score": 0.78},
+  {"canonical": "Clean Energy Revolution", "classes": ["TECH"], "present_in_deck": true, "frequency": 3, "priority": 0.78, "score": 0.82},
+  {"canonical": "AI Innovation Pipeline", "classes": ["TECH"], "present_in_deck": true, "frequency": 2, "priority": 0.76, "score": 0.8}
+]
