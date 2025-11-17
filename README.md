@@ -5,7 +5,11 @@
 [![CI](https://github.com/yaniv-golan/asr-bias-builder/workflows/CI/badge.svg)](https://github.com/yaniv-golan/asr-bias-builder/actions)
 [![PyPI](https://img.shields.io/pypi/v/asr-bias-builder)](https://pypi.org/project/asr-bias-builder/)
 [![Python](https://img.shields.io/pypi/pyversions/asr-bias-builder)](https://pypi.org/project/asr-bias-builder/)
+[![Downloads](https://img.shields.io/pypi/dm/asr-bias-builder)](https://pypi.org/project/asr-bias-builder/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+[![GitHub Issues](https://img.shields.io/github/issues/yaniv-golan/asr-bias-builder)](https://github.com/yaniv-golan/asr-bias-builder/issues)
+[![GitHub Pull Requests](https://img.shields.io/github/issues-pr/yaniv-golan/asr-bias-builder)](https://github.com/yaniv-golan/asr-bias-builder/pulls)
+[![Last Commit](https://img.shields.io/github/last-commit/yaniv-golan/asr-bias-builder)](https://github.com/yaniv-golan/asr-bias-builder/commits/main)
 
 ASR Bias Builder extracts high-value entities from PDF/PPTX decks and produces:
 
