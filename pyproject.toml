@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "asr-bias-builder"
-version = "0.1.0"
+version = "0.1.1"
 description = "Build ASR bias artifacts from presentation decks"
 authors = [{name = "Yaniv Golan", email = "yaniv@golan.name"}]
 readme = "README.md"
