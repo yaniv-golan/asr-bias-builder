@@ -11,6 +11,6 @@ PyMuPDF==1.26.6
 pytesseract==0.3.13
 python-pptx==1.0.2
 PyYAML==6.0.3
-regex==2025.11.3
+regex==2026.1.15
 typing_extensions==4.15.0
 xlsxwriter==3.2.9
