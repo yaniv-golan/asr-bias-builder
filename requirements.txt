@@ -3,7 +3,7 @@ charset-normalizer==3.4.4
 cryptography==46.0.3
 flashtext==2.7
 lxml==6.0.2
-packaging==25.0
+packaging==26.0
 pdfminer.six==20251107
 pillow==12.0.0
 pycparser==2.23
